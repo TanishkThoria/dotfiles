@@ -4,5 +4,11 @@ Note: My configs are not very advanced, so those looking for a work of art may b
 
 <br/>
 
+# Inspiration
+Lots of my dotfiles have taken heavy inspiration from [Derek Taylor's Dotfiles](https://gitlab.com/dwt1/dotfiles).  
+
+<br/>
+<br/>
+
 # License
 These files are licensed under the MIT License.
