@@ -41,9 +41,7 @@ if [ -f /home/tanishk/.config/synth-shell/synth-shell-prompt.sh ] && [ -n "$( ec
 	source /home/tanishk/.config/synth-shell/synth-shell-prompt.sh
 fi
 
-# neofetch
-colorscript random
-echo ""
+neofetch
 echo ""
 echo ""
 
