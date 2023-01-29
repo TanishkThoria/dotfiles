@@ -6,6 +6,7 @@ Note: My configs are not very advanced, so those looking for a work of art may b
 
 # Inspiration
 Lots of my dotfiles have taken heavy inspiration from [Derek Taylor's Dotfiles](https://gitlab.com/dwt1/dotfiles).  
+I also take some light inspirated from [Elena Pan's Dotfiles](https://github.com/elenapan/dotfiles).
 
 <br/>
 <br/>
