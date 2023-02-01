@@ -3,7 +3,7 @@
 TERMINAL="kitty"
 
 # Give user a rofi prompt
-choice=$(echo "NeoVIM|i3 WM|Bashrc|Rofi|Config Menu" | rofi -sep '|' -dmenu -p "Config: " )
+choice=$(echo "i3 WM|NeoVIM|Kitty|Bashrc|Rofi|Config Menu" | rofi -sep '|' -dmenu -p "Config: " )
 
 # Set lua_path accordingly (NeoVIM config modules)
 export LUA_PATH="$HOME/.config/nvim/?.lua;$LUA_PATH"
@@ -27,6 +27,21 @@ elif [ "$choice" = "NeoVIM" ]; then
     elif [ "$choice" = "plugins.lua" ]; then
         $TERMINAL -- nvim ~/.config/nvim/plugins.lua 
     
+    fi
+
+elif [ "$choice" = "Kitty" ]; then
+     # Choose one of the configs
+    choice=$(echo "kitty.conf|dracula-dark-colors.conf|elenapan-colors.conf" | rofi -sep '|' -dmenu -p "Kitty: " )
+    
+    if [ "$choice" = "kitty.conf" ]; then
+        $TERMINAL -- nvim ~/.config/kitty/kitty.conf
+
+    elif [ "$choice" = "dracula-dark-colors.conf" ]; then
+        $TERMINAL -- nvim ~/.config/kitty/dracula-dark-colors.conf
+    
+    elif [ "$choice" = "elenapan-colors.conf" ]; then
+        $TERMINAL -- nvim ~/.config/kitty/elenapan-colors.conf
+
     fi
 
 elif [ "$choice" = "Bashrc" ]; then
