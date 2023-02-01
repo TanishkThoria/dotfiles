@@ -192,4 +192,5 @@ bar {
         status_command i3status
 }
 
-# Autostart applications
+# Remove titlebars
+for_window [title="^.*"] border pixel 0
