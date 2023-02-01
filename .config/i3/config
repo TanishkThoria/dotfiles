@@ -194,3 +194,6 @@ bar {
 
 # Remove titlebars
 for_window [title="^.*"] border pixel 0
+
+# Gaps
+gaps inner 6
