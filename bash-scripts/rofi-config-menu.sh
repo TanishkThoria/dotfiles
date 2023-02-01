@@ -25,7 +25,7 @@ elif [ "$choice" = "NeoVIM" ]; then
         $TERMINAL -- nvim ~/.config/nvim/highlights.lua 
 
     elif [ "$choice" = "plugins.lua" ]; then
-        $TERMINAL -- nvim ~/.config/nvim/highlights.lua 
+        $TERMINAL -- nvim ~/.config/nvim/plugins.lua 
     
     fi
 
