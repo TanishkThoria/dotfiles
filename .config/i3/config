@@ -197,3 +197,6 @@ for_window [title="^.*"] border pixel 0
 
 # Gaps
 gaps inner 6
+
+# Autostart applications
+exec "nitrogen --restore"
