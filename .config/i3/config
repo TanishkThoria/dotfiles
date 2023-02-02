@@ -195,6 +195,16 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
         position top
+        font pango:monospace 10
+        tray_output primary
+
+        colors {
+            background #2f343f
+            statusline #c5c8c6
+            focused_workspace #7da5d8 #2f343f
+            active_workspace #7da5d8 #2f343f
+            inactive_workspace #3f3f3f #d0bfff
+        }
 }
 
 # Remove titlebars
