@@ -41,6 +41,7 @@ echo ""
 echo ""
 
 # Starship prompt
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
 eval "$(starship init bash)"
 
 # Zoxide (similar to autojump)
