@@ -35,19 +35,19 @@ fi
 
 unset rc
 
-##-----------------------------------------------------
-## synth-shell-prompt.sh
-if [ -f /home/tanishk/.config/synth-shell/synth-shell-prompt.sh ] && [ -n "$( echo $- | grep i )" ]; then
-	source /home/tanishk/.config/synth-shell/synth-shell-prompt.sh
-fi
-
+# Neofetch
 neofetch
 echo ""
 echo ""
 
+# Starship prompt
+eval "$(starship init bash)"
+
+# Zoxide (similar to autojump)
 export _ZO_ECHO='1'
 eval "$(zoxide init bash)"
 
+# Aliases
 alias ls="exa -al --color=always --group-directories-first"
 alias lt='exa -aT --color=always --group-directories-first' # tree listing
 
