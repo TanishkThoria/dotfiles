@@ -202,6 +202,11 @@ for_window [title="^.*"] border pixel 0
 
 # Gaps
 gaps inner 6
+gaps outer -2
 
 # Autostart applications
 exec "nitrogen --restore"
+
+# (It sets the resolution and refresh rate, will be different for most monitors/setups)
+# Most people should change/remove this line: 
+exec "xrandr --output DP-3 --mode 3440x1440 --rate 100" 
