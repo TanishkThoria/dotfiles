@@ -55,6 +55,9 @@ bindsym $mod+Return exec kitty
 bindsym $mod+n exec "firefox -P Home"
 bindsym $mod+m exec "firefox -P Work"
 
+# take a screenshot using flameshot
+bindsym $mod+Shift+s exec "flameshot gui"
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
