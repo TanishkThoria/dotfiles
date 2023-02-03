@@ -3,13 +3,16 @@
 TERMINAL="kitty"
 
 # Give user a rofi prompt
-choice=$(echo "i3 WM|NeoVIM|Kitty|Bashrc|Starship|Rofi|Config Menu" | rofi -sep '|' -dmenu -p "Config: " )
+choice=$(echo "i3 WM|Polybar|NeoVIM|Kitty|Bashrc|Starship|Rofi|Config Menu" | rofi -sep '|' -dmenu -p "Config: " )
 
 # Set lua_path accordingly (NeoVIM config modules)
 export LUA_PATH="$HOME/.config/nvim/?.lua;$LUA_PATH"
 
 if [ "$choice" = "i3 WM" ]; then
     $TERMINAL -- nvim ~/.config/i3/config 
+
+elif [ "$choice" = "Polybar" ]; then
+    $TERMINAL -- nvim ~/.config/polybar/config.ini
 
 elif [ "$choice" = "NeoVIM" ]; then
     # Choose one of the configs
