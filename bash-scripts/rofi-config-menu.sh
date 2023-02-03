@@ -3,7 +3,7 @@
 TERMINAL="kitty"
 
 # Give user a rofi prompt
-choice=$(echo "i3 WM|NeoVIM|Kitty|Bashrc|Rofi|Config Menu" | rofi -sep '|' -dmenu -p "Config: " )
+choice=$(echo "i3 WM|NeoVIM|Kitty|Bashrc|Starship|Rofi|Config Menu" | rofi -sep '|' -dmenu -p "Config: " )
 
 # Set lua_path accordingly (NeoVIM config modules)
 export LUA_PATH="$HOME/.config/nvim/?.lua;$LUA_PATH"
@@ -47,6 +47,9 @@ elif [ "$choice" = "Kitty" ]; then
 elif [ "$choice" = "Bashrc" ]; then
     $TERMINAL -- nvim ~/.bashrc 
     
+elif [ "$choice" = "Starship" ]; then
+    $TERMINAL -- nvim ~/.config/starship/starship.toml
+
 elif [ "$choice" = "Rofi" ]; then
     $TERMINAL -- nvim ~/.config/rofi/config.rasi 
 
