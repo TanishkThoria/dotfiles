@@ -55,4 +55,4 @@ alias lt='exa -aT --color=always --group-directories-first' # tree listing
 alias localhost="cd ~/websiteProject/Personal-Website; hugo server -D; cd -"
 alias gcom="git add -A; git commit"
 
-alias config='/usr/bin/git --git-dir=/home/tanishk/.cfg/ --work-tree=/home/tanishk'
+alias cfg='/usr/bin/git --git-dir=/home/tanishk/.cfg/ --work-tree=/home/tanishk'
