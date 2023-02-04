@@ -50,6 +50,11 @@ eval "$(zoxide init bash)"
 
 # Aliases
 
+# Confirm before overwriting something
+alias cp="cp -i"
+alias mv='mv -i'
+alias rm='rm -i'
+
 # Use ripgrep instead of grep for faster speed
 alias grep="rg"
 
