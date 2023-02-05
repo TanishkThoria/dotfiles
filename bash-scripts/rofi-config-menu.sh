@@ -1,9 +1,9 @@
 #!/usr/bin/bash
 
 # Applications
-TERMINAL="kitty"
-sep="--" # see man page of your terminal emulator for how to run programs
-EDITOR="emacs"
+TERMINAL=""
+sep="" # see man page of your terminal emulator for how to run programs
+EDITOR="emacsclient -c -a 'emacs'" # emacs is not a terminal application (unlike vim), so terminal and separator vars will be left blank
 
 # Give user a rofi prompt
 choice=$(echo "i3 WM|Polybar|Doom Emacs|NeoVIM|Kitty|Bashrc|Starship|Rofi|Config Menu" | rofi -sep '|' -dmenu -p "Config: " )
