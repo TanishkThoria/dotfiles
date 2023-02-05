@@ -54,7 +54,7 @@ eval "$(zoxide init bash)"
 # Aliases
 
 # Emacs client for faster launch (requires emacs daemon)
-alias emacs="emacsclient -c -a 'emacs'"
+alias emacs="emacsclient -c -a "emacs""
 
 # Confirm before overwriting something
 alias cp="cp -i"
