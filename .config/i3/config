@@ -221,7 +221,8 @@ gaps inner 6
 gaps outer -2
 
 # Autostart applications
-exec "nitrogen --restore"
+exec "nitrogen --restore" # wallpaper
+exec "emacs --daemon"     # doom emacs daemon
 
 # (It sets the resolution and refresh rate, will be different for most monitors/setups)
 # Most people should change/remove this line: 

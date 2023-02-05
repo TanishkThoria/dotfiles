@@ -16,7 +16,10 @@ export PATH
 export LUA_PATH="$HOME/.config/nvim/?.lua;$LUA_PATH"
 
 # Set default editor to NeoVIM
-export EDITOR="/bin/nvim" 
+# export EDITOR="/bin/nvim" 
+
+# Include doom emacs in path 
+export PATH="$HOME/.emacs.d/bin:$PATH"
 
 # ignore upper and lowercase when TAB completion
 bind "set completion-ignore-case on"
@@ -49,6 +52,9 @@ export _ZO_ECHO='1'
 eval "$(zoxide init bash)"
 
 # Aliases
+
+# Emacs client for faster launch (requires emacs daemon)
+alias emacs="emacsclient -c -a 'emacs'"
 
 # Confirm before overwriting something
 alias cp="cp -i"
