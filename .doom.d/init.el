@@ -56,7 +56,7 @@
        (evil +everywhere); come to the dark side, we have cookies
        file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
-       (format +onsave)  ; automated prettiness
+       ;;(format +onsave)  ; automated prettiness
        ;;god               ; run Emacs commands without modifier keys
        ;;lispy             ; vim for lisp, for people who don't like vim
        ;;multiple-cursors  ; editing in many places at once
@@ -77,11 +77,11 @@
        ;;eshell            ; the elisp shell that works everywhere
        ;;shell             ; simple shell REPL for Emacs
        ;;term              ; basic terminal emulator for Emacs
-       vterm             ; the best terminal emulation in Emacs
+       ;;vterm             ; the best terminal emulation in Emacs
 
        :checkers
        syntax              ; tasing you for every semicolon you forget
-       (spell +flyspell) ; tasing you for misspelling mispelling
+       ;;(spell +flyspell) ; tasing you for misspelling mispelling
        ;;grammar           ; tasing grammar mistake every you make
 
        :tools
@@ -95,7 +95,7 @@
        (eval +overlay)     ; run code, run (also, repls)
        ;;gist              ; interacting with github gists
        lookup              ; navigate your code and its documentation
-       ;;lsp               ; M-x vscode
+       lsp               ; M-x vscode
        magit             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
@@ -110,7 +110,7 @@
 
        :os
        (:if IS-MAC macos)  ; improve compatibility with macOS
-       tty               ; improve the terminal Emacs experience
+       ;;tty               ; improve the terminal Emacs experience
 
        :lang
        ;;agda              ; types of types of types of types...
@@ -148,7 +148,7 @@
        ;;latex             ; writing papers in Emacs has never been so fun
        ;;lean              ; for folks with too much to prove
        ;;ledger            ; be audit you can be
-       lua               ; one-based indices? one-based indices
+       ;;lua               ; one-based indices? one-based indices
        markdown          ; writing docs for people to ignore
        ;;nim               ; python + lisp at the speed of c
        ;;nix               ; I hereby declare "nix geht mehr!"
@@ -173,7 +173,7 @@
        ;;swift             ; who asked for emoji variables?
        ;;terra             ; Earth and Moon in alignment for performance.
        ;;web               ; the tubes
-       yaml              ; JSON, but readable
+       ;;yaml              ; JSON, but readable
        ;;zig               ; C, but simpler
 
        :email
@@ -192,3 +192,12 @@
        :config
        ;;literate
        (default +bindings +smartparens))
+
+;;(after! lsp
+;;(add-hook 'java-mode-hook #'lsp))
+;;
+;;(after! lsp-mode
+;;(add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
+;;
+;;(after! company
+;;(push 'company-lsp company-backends))
