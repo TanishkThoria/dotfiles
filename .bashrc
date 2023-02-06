@@ -24,6 +24,9 @@ export PATH="$HOME/.emacs.d/bin:$PATH"
 # ignore upper and lowercase when TAB completion
 bind "set completion-ignore-case on"
 
+# Use vim keybindings for terminal
+set -o vi
+
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
