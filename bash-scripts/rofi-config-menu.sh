@@ -3,16 +3,19 @@
 # Applications
 TERMINAL=""
 sep="" # see man page of your terminal emulator for how to run programs
-EDITOR="emacsclient -c -a 'emacs'" # emacs is not a terminal application (unlike vim), so terminal and separator vars will be left blank
+EDITOR="command emacsclient -c -a 'emacs'" # emacs is not a terminal application (unlike vim), so terminal and separator vars will be left blank
 
 # Give user a rofi prompt
-choice=$(echo "i3 WM|Polybar|Doom Emacs|NeoVIM|Kitty|Bashrc|Starship|Rofi|Config Menu" | rofi -sep '|' -dmenu -p "Config: " )
+choice=$(echo "i3 WM|Picom|Polybar|Doom Emacs|NeoVIM|Kitty|Bashrc|Starship|Rofi|Config Menu" | rofi -sep '|' -dmenu -p "Config: " )
 
 # Set lua_path accordingly (NeoVIM config modules)
 export LUA_PATH="$HOME/.config/$EDITOR/?.lua;$LUA_PATH"
 
 if [ "$choice" = "i3 WM" ]; then
     $TERMINAL $sep $EDITOR ~/.config/i3/config 
+
+elif [ "$choice" = "Picom" ]; then
+    $TERMINAL $sep $EDITOR ~/.config/picom/picom.conf
 
 elif [ "$choice" = "Polybar" ]; then
     $TERMINAL $sep $EDITOR ~/.config/polybar/config.ini
