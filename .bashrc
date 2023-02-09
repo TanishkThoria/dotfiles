@@ -69,6 +69,9 @@ alias rm='rm -i'
 # Use ripgrep instead of grep for faster speed
 alias grep="rg"
 
+# Use bat instead of cat for nicer features 
+alias cat="bat"
+
 # Use exa instead of ls for nicer colors
 alias ls="exa -al --color=always --group-directories-first"
 alias lt='exa -aT --color=always --group-directories-first' # tree listing
