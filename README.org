@@ -1,0 +1,610 @@
+#+title: Tanishk Thoria's Dotfiles
+
+* Table of Contents :toc:
+- [[#about-this-repo][About this Repo]]
+- [[#i3][i3]]
+  - [[#about-this-configuration][About This Configuration]]
+  - [[#general-variables][General Variables]]
+  - [[#essential-processes][Essential Processes]]
+  - [[#keybindings-and-shorcuts][Keybindings and Shorcuts]]
+  - [[#reloadingrestartingexiting][Reloading/Restarting/Exiting]]
+  - [[#aesthetics-and-autostart-applications][Aesthetics and Autostart Applications]]
+- [[#polybar][Polybar]]
+  - [[#about-this-configuration-1][About This Configuration]]
+  - [[#general-settings][General Settings]]
+- [[#rofi][Rofi]]
+- [[#kitty][Kitty]]
+- [[#bashrc][Bashrc]]
+- [[#doom-emacs][Doom Emacs]]
+- [[#neovim][NeoVIM]]
+- [[#picom][Picom]]
+- [[#starship][Starship]]
+- [[#screenshot-gallery][Screenshot Gallery]]
+
+* About this Repo
+This repository is the home to my configurations, also known as dotfiles.
+My configurations are made for my own personal use. They are uploaded onto this repository for my ease of access.
+Feel free to use them if you would like, but bare in mind that they are not made for any workflow except for mine.
+
+
+* i3
+
+** About This Configuration
+THIS CONFIG IS NOT "PLUG AND PLAY". Please carefully review it before trying to run it. There are some values that I have hard-coded that might need to be changed. You will mostly likely need to adjust the font and display settings before using this config.
+
+
+My i3 config is one that many might want to change. The main differences between what other people might have compared to my configurations are in the keybindings. Not that I have particularly unconventional keybindings, but everyone has different preferences.
+
+
+** General Variables
+Here, we will set the general variables for the rest of the config.
+
+#+begin_src text
+# Set modkey as the SUPER key.
+set $mod Mod4
+
+# Font for window titles. Will also be used by the bar unless a different font is used in the bar {} block below.
+font pango:FuraMono Nerd Font Mono 10
+#+end_src
+
+An alternative font that is recommended in the auto-generated i3 config is DejaVu Sans Mono. If you wanted to use this font, for example, you would instead use this line:
+
+#+begin_src text
+# Font for window titles. Will also be used by the bar unless a different font is used in the bar {} block below.
+font pango:DejaVu Sans Mono 8
+#+end_src
+
+** Essential Processes
+These are things that start in the background in order for the system to work properly.
+
+#+begin_src text
+# Start XDG autostart .desktop files using dex. See also https://wiki.archlinux.org/index.php/XDG_Autostart.
+exec --no-startup-id dex-autostart --autostart --environment i3
+
+# The combination of xss-lock, nm-applet and pactl is a popular choice, so
+# they are included here as an example. Modify as you see fit.
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+# NetworkManager is the most popular way to manage wireless networks on Linux,
+# and nm-applet is a desktop environment-independent system tray GUI for it.
+exec --no-startup-id nm-applet
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+#+end_src
+
+** Keybindings and Shorcuts
+
+This section will have a lot of the keybindings and shortcuts that I have set.
+
+*** Applications
+
+These are the keybindings that I have set for some of the applications that I use often.
+
+#+begin_src text
+# start a terminal
+bindsym $mod+Return exec kitty
+
+# open firefox (I have two different profiles that are mapped separately)
+bindsym $mod+n exec "firefox -P Home"
+bindsym $mod+m exec "firefox -P Work"
+
+# take a screenshot using flameshot
+bindsym $mod+Shift+s exec "flameshot gui"
+
+# start rofi (a program launcher [among other things])
+bindsym $mod+d exec "rofi -modi drun,run -show drun"
+
+# custom rofi config menu (see)
+bindsym $mod+c exec "~/bash-scripts/rofi-config-menu.sh"
+#+end_src
+
+I personally prefer rofi as a run menu, but if you prefer to use dmenu, you could use this instead:
+#+begin_src text
+# start dmenu (a program launcher)
+bindsym $mod+d exec --no-startup-id dmenu_run
+#+end_src
+
+There also is i3-dmenu-desktop which only displays applications shipping a .desktop file. It is a wrapper around dmenu, so you need that installed. Here is how you would use that:
+
+#+begin_src text
+# start dmenu with i3-dmenu-desktop wrapper
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+#+end_src
+
+Remember that you will only want to use 1 of these run menus at a time, or else the keyboard shortcuts will conflict.
+
+
+
+*** Window Related Actions
+
+These are how you can control windows and their position/focus.
+
+**** Changing Focus / Moving Focused Window
+This will be how you can change which window is in focus, allowing you to swap between different windows quickly and efficiently. There are also the keybindings for moving around the focused window here. I have these keybindings set to the VIM keys, but the arrow keys are also added for those who need it.
+
+#+begin_src text
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# kill focused window
+bindsym $mod+q kill
+#+end_src
+
+**** Changing Layout
+
+This will be how the layout is controlled, and how you can change it on the fly.
+
+I have the following lines are commented out due to conflict with vim keys. They are also not necessary as they can just be replaced with mod+e (a different shortcut that I have set that basically toggles between horizontal and vertical orientations). If, for some reason, you need it, here they are:
+
+#+begin_src text
+# split in horizontal orientation
+# bindsym $mod+Shift+h split h
+# split in vertical orientation
+# bindsym $mod+Shift+v split v
+#+end_src
+
+Here are the rest of my settings for layout:
+
+#+begin_src text
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# move tiling windows via drag & drop by left-clicking into the title bar,
+# or left-clicking anywhere into the window while holding the floating modifier.
+tiling_drag modifier titlebar
+
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+#+end_src
+
+We can also manual resize windows using the following code:
+#+begin_src text
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+#+end_src
+
+**** Workspaces
+
+This section contains how the workspaces are configured. There are the keybindings for switching workspaces and windows to different workspaces.
+
+#+begin_src text
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+#+end_src
+
+** Reloading/Restarting/Exiting
+
+How i3 is reloaded, restarted, and exited. All keybindings are default.
+
+#+begin_src text
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+#+end_src
+
+** Aesthetics and Autostart Applications
+This section contains the changes that are mostly visual, along with some other things that just make my life easier.
+
+I decided to use Polybar instead of the built-in i3bar.
+#+begin_src text
+# Polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+#+end_src
+
+If you wanted to use i3 bar, you could use this:
+#+begin_src text
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        status_command i3status
+
+        position top
+        tray_output primary
+
+        colors {
+            background #2f343f
+            statusline #c5c8c6
+            focused_workspace #7da5d8 #2f343f
+            active_workspace #7da5d8 #2f343f
+            inactive_workspace #3f3f3f #d0bfff
+        }
+}
+#+end_src
+
+Some misc. aesthetic changes:
+
+#+begin_src text
+# Remove titlebars
+for_window [title="^.*"] border pixel 0
+
+# Gaps
+gaps inner 6
+gaps outer -2
+#+end_src
+
+I also have the emacs daemon and nitrogen autostart.
+Emacs daemon is for extremely fast emacs launch and nitrogen is for setting wallpapers.
+#+begin_src text
+exec "nitrogen --restore" # wallpaper
+exec "emacs --daemon"     # doom emacs daemon
+#+end_src
+
+This sets the resolution and refresh rate, will be different for most monitors/setups
+Most people should change/remove this line (I have it here because my monitor defaults to 60hz, but it can do 100hz):
+
+#+begin_src text
+exec "xrandr --output DP-3 --mode 3440x1440 --rate 100"
+#+end_src
+
+
+
+* Polybar
+
+** About This Configuration
+I highly recommend a [[https://www.nerdfonts.com/][nerd font]] due to the symbols used.
+
+The powerline theme on the right is inspired by [[https://gitlab.com/dwt1/dotfiles][Derek Taylor's Dotfiles]].
+
+This configuration is made specifically for my color scheme. You will most likely want to change it if you are using a different colorscheme. This is made easy as you can (mostly) just change the values in the "colors" section.
+
+** General Settings
+[global/wm]
+# Top bar:
+margin-bottom = 0
+
+[colors]
+# Color scheme:
+background = #2f343f
+background-alt = #373B41
+foreground = #DDA0DD
+primary = #7da5d8
+secondary = #d0bfff
+alert = #A54242
+disabled = #707880
+arrow1 = #462857
+arrow2 = #1d2951
+arrow3 = #462857
+
+[bar/mainbar-i3]
+width = 100%
+
+# Normal height:
+height = 20pt
+# Slightly larger (good when offsetting bar)
+# height = 24pt
+
+# Square bar:
+radius = 0
+# Rounded edges:
+# radius = 6
+
+; dpi = 96
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+# Underline for the workspace indicator:
+line-size = 3.5pt
+
+# No offset (pushed against top of the screen):
+border-size = 0pt
+# With offset(gaps between top of screen and bar):
+# border-size = 5
+
+border-color = #00000000
+
+padding-left = 1
+padding-right = 1
+
+# Margins between modules (set to 0 to avoid interfering with the arrows):
+module-margin-left = 0
+module-margin-right = 0
+
+# No separator (using arrow modules):
+separator =
+# [Default] separator:
+# separator = |
+
+# Nerd font for nice symbols (recommended):
+font-0 = FuraMono Nerd Font Mono
+
+# Layout:
+modules-left = xworkspaces
+modules-center = xwindow
+modules-right = arrow1 arrow2 pulseaudio arrow3 memory arrow2 cpu arrow3 wlan arrow2 date
+
+# Cursor symbols:
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+# Inter-process messaging:
+enable-ipc = true
+
+# Use if you want a system tray:
+# tray-position = right
+
+# Restacking (stacks windows ontop of the bar):
+; wm-restack = generic
+; wm-restack = bspwm
+; wm-restack = i3
+; override-redirect = true
+
+[module/arrow1]
+; arrow1 to background
+type = custom/text
+content = "%{T2} %{T-}"
+content-font = 2
+content-foreground = ${colors.arrow1}
+content-background = ${colors.background}
+
+[module/arrow2]
+; arrow2 to arrow1
+type = custom/text
+content = "%{T2} %{T-}"
+content-font = 2
+content-foreground = ${colors.arrow2}
+content-background = ${colors.arrow1}
+
+[module/arrow3]
+; arrow3 to arrow2
+type = custom/text
+content = "%{T2} %{T-}"
+content-font = 2
+content-foreground = ${colors.arrow3}
+content-background = ${colors.arrow2}
+
+[module/xworkspaces]
+type = internal/xworkspaces
+
+label-active = %name%
+label-active-background = ${colors.background-alt}
+label-active-underline= ${colors.primary}
+label-active-padding = 1
+
+label-occupied = %name%
+label-occupied-padding = 1
+
+label-urgent = %name%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 1
+
+label-empty = %name%
+label-empty-foreground = ${colors.disabled}
+label-empty-padding = 1
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:60:...%
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+label-mounted = %{F#F0C674}%mountpoint%%{F-} %percentage_used%%
+
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.disabled}
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume-prefix = "VOL "
+format-volume-prefix-foreground = ${colors.primary}
+format-volume = <label-volume>
+
+label-volume = %percentage%%
+
+label-muted = muted
+label-muted-foreground = ${colors.disabled}
+
+format-volume-background = ${colors.arrow2}
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+format-prefix = "KBD "
+format-prefix-foreground = ${colors.primary}
+label-layout = %layout%
+
+label-indicator-padding = 2
+label-indicator-margin = 1
+label-indicator-foreground = ${colors.background}
+label-indicator-background = ${colors.secondary}
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = "RAM "
+format-prefix-foreground = ${colors.primary}
+label = %percentage_used:2%%
+
+format-background = ${colors.arrow1}
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = "CPU "
+format-prefix-foreground = ${colors.primary}
+label = %percentage:2%%
+
+format-background = ${colors.arrow2}
+
+[network-base]
+type = internal/network
+interval = 5
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+label-disconnected = %{F#F0C674}%ifname%%{F#707880} disconnected
+
+
+format-disconnected-background = ${colors.arrow1}
+format-connected-background = ${colors.arrow1}
+
+[module/wlan]
+inherit = network-base
+interface-type = wireless
+label-connected = %{F#7da5d8 }%ifname%%{F-} %local_ip%
+
+[module/eth]
+inherit = network-base
+interface-type = wired
+label-connected = %{F#7da5d8}%ifname%%{F-} %local_ip%
+
+[module/kernel]
+type = custom/script
+exec = uname -r
+tail = false
+interval = 1024
+
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+format-prefix = " VER "
+format-prefix-foreground = ${colors.arrow1}
+
+[module/date]
+type = internal/date
+interval = 1
+
+date = %H:%M
+date-alt = %Y-%m-%d %H:%M:%S
+
+label = %date%
+label-foreground = ${colors.primary}
+
+format-background = ${colors.arrow2}
+
+[settings]
+screenchange-reload = true
+pseudo-transparency = true
+
+; vim:ft=dosini
+
+
+* Rofi
+
+* Kitty
+
+* Bashrc
+
+* Doom Emacs
+
+* NeoVIM
+
+* Picom
+
+* Starship
+
+
+* Screenshot Gallery
