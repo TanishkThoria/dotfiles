@@ -89,6 +89,9 @@ function cht () {
 
 # Aliases
 
+# Replace tldr with cht function (see above)
+alias tldr="cht"
+
 # Emacs client for faster launch (requires emacs daemon) [with fallback of normal emacs]
 alias emacs="emacsclient -c -a 'emacs'"
 # Emacs in terminal mode (same deal. first try daemon, fallback of normal)
