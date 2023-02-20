@@ -81,6 +81,12 @@ ex ()
   fi
 }
 
+### Command Cheat Sheets
+# usage: cht <command>
+function cht () {
+    curl cht.sh/$1
+}
+
 # Aliases
 
 # Emacs client for faster launch (requires emacs daemon) [with fallback of normal emacs]
