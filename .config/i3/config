@@ -74,6 +74,9 @@ bindsym $mod+d exec "rofi -modi drun,run -show drun"
 # custom rofi config menu:
 bindsym $mod+c exec "~/bash-scripts/rofi-config-menu.sh"
 
+# swap master with focused window
+bindsym $mod+Shift+m exec "~/.config/i3/swapmaster.py"
+
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -224,8 +227,12 @@ gaps inner 6
 gaps outer -2
 
 # Autostart applications
-exec "nitrogen --restore" # wallpaper
-exec "emacs --daemon"     # doom emacs daemon
+exec_always --no-startup-id "$HOME/.config/i3/masterstack.py" # master and stack layout
+exec "nitrogen --restore"                                     # wallpaper
+exec "emacs --daemon"                                         # doom emacs daemon
+
+# Open emacs everywhere and make it floating
+bindsym $mod+Shift+t exec "emacsclient --eval '(emacs-everywhere)'"
 
 # (It sets the resolution and refresh rate, will be different for most monitors/setups)
 # Most people should change/remove this line: 
