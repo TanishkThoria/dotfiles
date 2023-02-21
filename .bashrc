@@ -115,6 +115,3 @@ alias lt='exa -aT --color=always --group-directories-first' # tree listing
 # Git shorthands:
 alias gcom="git add -A; git commit"
 alias cfg='/usr/bin/git --git-dir=/home/tanishk/.cfg/ --work-tree=/home/tanishk'
-
-# Easy hugo site visualization
-alias localhost="cd ~/websiteProject/Personal-Website; hugo server -D; cd -"
