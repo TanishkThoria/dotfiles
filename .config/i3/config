@@ -228,6 +228,7 @@ gaps outer -2
 
 # Autostart applications
 exec_always --no-startup-id "$HOME/.config/i3/masterstack.py" # master and stack layout
+exec_always --no-startup-id "conky"                           # conky widget 
 exec "nitrogen --restore"                                     # wallpaper
 exec "emacs --daemon"                                         # doom emacs daemon
 
