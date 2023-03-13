@@ -21,6 +21,9 @@ export LUA_PATH="$HOME/.config/nvim/?.lua;$LUA_PATH"
 # Include doom emacs in path 
 export PATH="$HOME/.emacs.d/bin:$PATH"
 
+# Include cargo in path
+export PATH="$PATH:$HOME/.cargo/env"
+
 # ignore upper and lowercase when TAB completion
 bind "set completion-ignore-case on"
 
