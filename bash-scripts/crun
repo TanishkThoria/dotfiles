@@ -57,7 +57,7 @@ crun -h for more information."
     fi
 
     touch $output_file
-    g++ $raw_program -o $output_file
+    g++ -std=c++17 -O2 $raw_program -o $output_file -Wall
 
     ./$output_file
 
