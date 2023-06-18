@@ -1,0 +1,73 @@
+#!/usr/bin/env sh
+
+# Takes a c++ program, compiles, and executes. Deletes the executable by default (can be changed).
+
+USAGE="Usage:
+    crun [-p] [-o output_file] file.cpp"
+
+preserve_exec=false
+custom_output_file=false
+raw_program=${@: -1}
+
+while getopts 'pho:' OPTION; do
+    case "$OPTION" in
+
+        p)
+            preserve_exec=true
+            ;;
+
+        h)
+            echo "Crun takes a c++ program, compiles, and executes. Deletes the executable by default."
+            echo $USAGE
+            echo
+
+            echo "-p    preserves executable file after running"
+            echo "-o    changes the executable file name"
+            echo "-h    shows this help page"
+            echo
+
+            echo "NOTE: The executable file generated when compiling will be named as the original program without the file extension. If there is a conflict, avoid overwriting a file using the -o flag."
+            exit 1
+            ;;
+
+        o)
+            output_file="$OPTARG"
+            custom_output_file=true
+            ;;
+
+        ?)
+            echo "Invalid usage."
+            echo $USAGE
+            echo "crun -h for more information"
+            exit 1
+            ;;
+    esac
+done
+
+if [ -f "$raw_program" ]; then
+
+    if [ $custom_output_file != "true" ]; then
+        output_file=${raw_program%.*}
+    fi
+
+    if [ -f "$output_file" ]; then
+        echo "File '$output_file' already exists. This process will likely overwrite or delete it.
+crun -h for more information."
+        exit 1
+    fi
+
+    touch $output_file
+    g++ $raw_program -o $output_file
+
+    ./$output_file
+
+    if [ $preserve_exec != "true" ]; then
+        rm $output_file
+    fi
+
+else
+    echo "Invalid usage: file '"$raw_program"' does not exist."
+    echo $USAGE
+    exit 1
+
+fi
