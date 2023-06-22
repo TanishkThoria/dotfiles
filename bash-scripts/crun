@@ -78,8 +78,8 @@ crun -h for more information."
 
     # if user enable debug flags for gcc
     if [ $gcc_debug_flags != "false" ]; then
-        # compile with debugging flags (see https://codeforces.com/blog/entry/15547 for more info on the flags)
-        g++ -std=c++17 -O2 $raw_program -o $output_file -Wall -Wextra  -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2 -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector
+        # compile with debugging flags
+        g++ -std=c++17 -O2 $raw_program -o $output_file -Wall -Wextra -Wshadow -Wconversion -Wfloat-equal -Wduplicated-cond -Wlogical-op
     else
         # compile
         g++ -std=c++17 -O2 $raw_program -o $output_file
