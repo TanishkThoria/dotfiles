@@ -14,9 +14,13 @@ Feel free to use them if you would like, but bare in mind that they are not made
 
 * Programs
 Window Manager:    [[https://github.com/i3/i3][i3 WM]]
+
 Bar:               [[https://github.com/polybar/polybar][Polybar]]
+
 Run Menu:          [[https://github.com/davatorium/rofi][Rofi]] (with [[https://github.com/newmanls/rofi-themes-collection/tree/master][Rounded Nord Dark theme]])
+
 Terminal Emulator: [[https://github.com/kovidgoyal/kitty][Kitty]]
+
 Compositor:        [[https://github.com/yshui/picom][Picom]]
 
 * Screenshot Gallery
@@ -29,6 +33,7 @@ Compositor:        [[https://github.com/yshui/picom][Picom]]
 
 * Inspiration
 Heavy inspiration from [[https://gitlab.com/dwt1/dotfiles][Derek Taylor's Dotfiles]].
+
 Some light inspiration from [[https://github.com/elenapan/dotfiles][Elena Pan's Dotfiles]].
 
 * License
