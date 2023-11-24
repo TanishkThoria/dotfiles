@@ -52,8 +52,9 @@ tiling_drag modifier titlebar
 bindsym $mod+Return exec kitty
 
 # open firefox (I have two different profiles that are mapped separately)
-bindsym $mod+n exec "firefox -P Home"
-bindsym $mod+m exec "firefox -P Work"
+bindsym $mod+b exec "firefox -P Home"
+bindsym $mod+n exec "firefox -P Work"
+bindsym $mod+m exec "firefox -P Business"
 
 # take a screenshot using flameshot
 bindsym $mod+Shift+s exec "flameshot gui"
