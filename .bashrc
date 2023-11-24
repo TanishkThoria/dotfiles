@@ -19,7 +19,7 @@ export LUA_PATH="$HOME/.config/nvim/?.lua;$LUA_PATH"
 # export EDITOR="/bin/nvim" 
 
 # Include doom emacs in path 
-export PATH="$HOME/.emacs.d/bin:$PATH"
+export PATH="$HOME/.config/emacs/bin:$PATH"
 
 # Include cargo in path
 export PATH="$PATH:$HOME/.cargo/env"
